@@ -29,7 +29,7 @@
                         </Grid.RowDefinitions>
                         <TextBox Grid.Row="0" Grid.Column="0" x:Name="txtFolderPath" Grid.ColumnSpan="1"/>
                         <Button Name="btnSelectFolder" Grid.Row="0" Grid.Column="1" Content="Select folder" Grid.ColumnSpan="1" Margin="20,0,20,0" Click="btnSelectFolder_Click"/>
-                        <ListView Grid.Row="1" x:Name="lsvFile" Margin="0,10,20,10" ItemsSource="{Binding capturedItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2">
+                        <ListView Grid.Row="1" x:Name="lsvFile" Margin="0,10,20,10" ItemsSource="{Binding capturedItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" MouseDoubleClick="lsvFile_MouseDoubleClick">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Image" Width="70">

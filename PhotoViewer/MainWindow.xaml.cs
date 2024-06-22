@@ -264,5 +264,42 @@ namespace PhotoViewer
             return imageExtensions.Contains(extension);
         }
 
+        private void lsvFile_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lsvFile.SelectedItem != null)
+            {
+                FileInfo selectedFile = (FileInfo)lsvFile.SelectedItem;
+
+                if (selectedFile.Type == "📂")
+                {
+                    txtFolderPath.Text = selectedFile.Path;
+
+                    // Refresh the ListView for the selected folder
+                    RefreshListView();
+                }
+                else if (selectedFile.Type == "📄")
+                {
+                    if (IsImageFile(selectedFile.Path))
+                    {
+                        // Display the image in a new window
+                        DisplayImage(selectedFile.Path);
+                    }
+                    else
+                    {
+                        // Open the file with the default associated application
+                        System.Diagnostics.Process.Start("explorer.exe", selectedFile.Path);
+                    }
+                }
+            }
+        }
+
+        private void DisplayImage(string imagePath)
+        {
+            BitmapImage bitmapImage = new BitmapImage(new Uri(imagePath));
+
+            ImageDisplayWindow imageDisplayWindow = new ImageDisplayWindow();
+            imageDisplayWindow.SetImageSource(bitmapImage);
+            imageDisplayWindow.Show();
+        }
     }
 }
